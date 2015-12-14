@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+	
+	<!-- 激活spring的注解. -->
+	<context:annotation-config />
+
+	<!-- 扫描注解组件并且自动的注入spring beans中. 例如,他会扫描@Controller 和@Service下的文件.所以确保此base-package设置正确. -->
+	<context:component-scan base-package="com.instony" />
+	
+	<!-- 定义数据源Bean，使用C3P0数据源实现，并注入数据源的必要信息 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
+		p:driverClass="com.mysql.jdbc.Driver"
+		p:jdbcUrl="jdbc:mysql://115.28.219.63/qdm160915374_db?characterEncoding=UTF-8"
+		p:user="qdm160915374"
+		p:password="19910325"
+		p:maxPoolSize="40"
+		p:minPoolSize="2"
+		p:initialPoolSize="2"
+		p:maxIdleTime="30"/>
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		p:dataSource-ref="dataSource">
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true"/>
+				<property name="database" value="MYSQL"/>
+			</bean>
+		</property>
+		<property name="packagesToScan" value="com.instony.*"/><!--待扫描的实体类包，不再需要persistence.xml了-->  
+        <property name="jpaProperties">  
+            <props>  
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>  
+                <prop key="hibernate.hbm2ddl.auto">update</prop>  
+            </props>  
+        </property>  
+	</bean>
+
+	<!-- 该Bean后处理器会告诉Spring处理DAO组件中 @PersistenceContext注解， -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/> 
+	
+	<!-- 配置针对JPA的局部事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" 
+		p:entityManagerFactory-ref="entityManagerFactory"/>
+
+	<!-- 根据事务注解来生成事务代理 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+    <!-- <mvc:resources mapping="/static/css/**" location="/static/css/"/>  
+    <mvc:resources mapping="/static/fonts/**" location="/static/fonts/"/>  
+    <mvc:resources mapping="/static/js/**" location="/static/js/"/>
+    <mvc:resources mapping="/static/images/**" location="/static/images/"/>
+    
+    <mvc:interceptors>  
+    使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求  
+    	<bean class="com.instony.interceptor.LoginInterceptor"/> 
+    	<bean class="com.instony.interceptor.AuthorizationInterceptor"/> 
+	</mvc:interceptors>  
+	 -->
+</beans>
