@@ -1,6 +1,6 @@
 package com.instony.action.json;
 
-import com.instony.model.Holiday;
+import com.instony.model.pojo.Holiday;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class HolidayAction extends ActionSupport
