@@ -2,11 +2,14 @@ package com.instony.model.pojo;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity
+@Entity//(name="holiday")
+@Table(name="holiday")
 public class Holiday
 {
 	@Id
+	//@Temporal(TemporalType.DATE)
 	private String date;
 	private Integer status;
 	

@@ -12,7 +12,7 @@ public class HolidayAction extends ActionSupport
 	public String getIsHoliday() throws Exception
 	{
 		holiday = new Holiday();
-		holiday.setDate("2015-12-14 12:59:59");
+		//holiday.setDate("2015-12-14 12:59:59");
 		holiday.setStatus(0);
 		return SUCCESS;
 	}

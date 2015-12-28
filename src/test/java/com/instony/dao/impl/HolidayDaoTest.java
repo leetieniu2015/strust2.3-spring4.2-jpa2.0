@@ -1,7 +1,5 @@
 package com.instony.dao.impl;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +19,9 @@ public class HolidayDaoTest
 	@Test
 	public void test()
 	{
-		List<Holiday> list = holidayDao.findAll(Holiday.class);
-		
-		System.out.println(list.size());
+		/*List<Holiday> list = holidayDao.findAll(Holiday.class);
+		Holiday holiday = list.get(0);*/
+		Holiday holiday = holidayDao.get(Holiday.class, "2016-01-01");
+		System.out.println(holiday.toString());
 	}
 }
