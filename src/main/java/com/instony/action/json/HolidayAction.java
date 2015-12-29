@@ -1,6 +1,9 @@
 package com.instony.action.json;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.instony.model.pojo.Holiday;
+import com.instony.service.HolidayService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class HolidayAction extends ActionSupport
@@ -9,11 +12,20 @@ public class HolidayAction extends ActionSupport
 	
 	private Holiday holiday;
 	
+	private String date;
+	
+	@Autowired
+	private HolidayService holidayService;
+	
 	public String getIsHoliday() throws Exception
 	{
-		holiday = new Holiday();
-		//holiday.setDate("2015-12-14 12:59:59");
-		holiday.setStatus(0);
+		holiday = holidayService.getHoliday(date);
+		return SUCCESS;
+	}
+	
+	public String saveHoliday() throws Exception
+	{
+		holiday = holidayService.saveHoliday(date);
 		return SUCCESS;
 	}
 
@@ -25,5 +37,15 @@ public class HolidayAction extends ActionSupport
 	public void setHoliday(Holiday holiday)
 	{
 		this.holiday = holiday;
+	}
+
+	public String getDate()
+	{
+		return date;
+	}
+
+	public void setDate(String date)
+	{
+		this.date = date;
 	}
 }

@@ -5,7 +5,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.instony.constant.HolidayStatus;
 import com.instony.dao.HolidayDao;
 import com.instony.model.pojo.Holiday;
 
@@ -16,12 +18,22 @@ public class HolidayDaoTest
 	@Autowired
 	private HolidayDao holidayDao;
 	
-	@Test
-	public void test()
+	/*@Test
+	public void testGet()
 	{
-		/*List<Holiday> list = holidayDao.findAll(Holiday.class);
-		Holiday holiday = list.get(0);*/
+		List<Holiday> list = holidayDao.findAll(Holiday.class);
+		Holiday holiday = list.get(0);
 		Holiday holiday = holidayDao.get(Holiday.class, "2016-01-01");
 		System.out.println(holiday.toString());
+	}*/
+	
+	@Test
+	@Transactional
+	public void testSave()
+	{
+		Holiday holiday = new Holiday();
+		holiday.setDate("2016-01-03");
+		holiday.setStatus(HolidayStatus.Weekend);
+		holidayDao.save(holiday);
 	}
 }

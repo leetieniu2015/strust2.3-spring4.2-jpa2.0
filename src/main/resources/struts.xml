@@ -35,7 +35,14 @@
 	<!-- ajax -->
 	<package name="ajax" extends="json-default">
 		<action name="getIsHoliday" class="com.instony.action.json.HolidayAction" method="getIsHoliday">  
-            <result name="SUCCESS" type="json"/><!-- type必须是json -->  
+            <result type="json">
+				<param name="root">holiday</param>
+			</result>
         </action>
+        <action name="saveHoliday" class="com.instony.action.json.HolidayAction" method="saveHoliday">  
+            <result type="json">
+				<param name="root">holiday</param>
+			</result>  
+        </action> 
 	</package>
 </struts>

@@ -59,15 +59,4 @@
 	<!-- 根据事务注解来生成事务代理 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
-    <!-- <mvc:resources mapping="/static/css/**" location="/static/css/"/>  
-    <mvc:resources mapping="/static/fonts/**" location="/static/fonts/"/>  
-    <mvc:resources mapping="/static/js/**" location="/static/js/"/>
-    <mvc:resources mapping="/static/images/**" location="/static/images/"/>
-    
-    <mvc:interceptors>  
-    使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求  
-    	<bean class="com.instony.interceptor.LoginInterceptor"/> 
-    	<bean class="com.instony.interceptor.AuthorizationInterceptor"/> 
-	</mvc:interceptors>  
-	 -->
 </beans>
