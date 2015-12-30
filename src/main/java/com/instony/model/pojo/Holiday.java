@@ -1,5 +1,6 @@
 package com.instony.model.pojo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,21 +15,18 @@ public class Holiday
 {
 	@Id
 	//@Temporal(TemporalType.DATE)
-	private String date;
+	@Column(name="date")
+	private String id;
 	@Enumerated(EnumType.ORDINAL)
 	private HolidayStatus status; // 0工作日,1休息日,2节假日
 	
 	public String getId()
 	{
-		return date;
+		return id;
 	}
-	public String getDate()
+	public void setId(String id)
 	{
-		return date;
-	}
-	public void setDate(String date)
-	{
-		this.date = date;
+		this.id = id;
 	}
 	public HolidayStatus getStatus()
 	{
@@ -41,6 +39,6 @@ public class Holiday
 	@Override
 	public String toString()
 	{
-		return "Holiday : { date : " + date + ",  status : " + status + "}";
+		return "Holiday : { date : " + id + ",  status : " + status + "}";
 	}
 }

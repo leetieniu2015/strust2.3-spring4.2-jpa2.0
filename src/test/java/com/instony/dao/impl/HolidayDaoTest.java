@@ -18,22 +18,20 @@ public class HolidayDaoTest
 	@Autowired
 	private HolidayDao holidayDao;
 	
-	/*@Test
+	@Test
 	public void testGet()
 	{
-		List<Holiday> list = holidayDao.findAll(Holiday.class);
-		Holiday holiday = list.get(0);
 		Holiday holiday = holidayDao.get(Holiday.class, "2016-01-01");
 		System.out.println(holiday.toString());
-	}*/
+	}
 	
-	@Test
+	/*@Test
 	@Transactional
 	public void testSave()
 	{
 		Holiday holiday = new Holiday();
-		holiday.setDate("2016-01-03");
+		holiday.setId("2016-01-03");
 		holiday.setStatus(HolidayStatus.Weekend);
 		holidayDao.save(holiday);
-	}
+	}*/
 }

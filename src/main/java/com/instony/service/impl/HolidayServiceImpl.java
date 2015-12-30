@@ -24,7 +24,7 @@ public class HolidayServiceImpl implements HolidayService
 		if(holiday == null)
 		{
 			holiday = new Holiday();
-			holiday.setDate(date);
+			holiday.setId(date);
 			if(DateUtil.isWeekend(date, DateUtil.SIMPLE_FORMAT))
 			{
 				holiday.setStatus(HolidayStatus.Weekend);
@@ -39,7 +39,7 @@ public class HolidayServiceImpl implements HolidayService
 	public Holiday saveHoliday(String date)
 	{
 		Holiday holiday = new Holiday();
-		holiday.setDate(date);
+		holiday.setId(date);
 		holiday.setStatus(HolidayStatus.Weekend);
 		holidayDao.save(holiday);
 		return holiday;
